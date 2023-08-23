@@ -51,9 +51,10 @@
     <div class="example4"><h1>掲示板</h1></div>
     新規さんへ、先ずは挨拶をしましょう。シード値は自分のidを決めるものでパスワードのようなものです。<br />今の話題に勇気を出して参加してみましょう！！！<br />
     メッセージが送れない場合メッセージや名前が規制されている可能性があります。<br />
+    送信ボタンを押してから若干遅延があります<br />
     <a href="/bbs/how">使い方</a><br />
 
-    <form  id="form">
+    <form id="form">
       <select name="channel" id="channel">
         <option value="main" selected>雑談</option>
         <option value="battle">バトルスタジアム</option>
@@ -66,6 +67,13 @@
         <option value="/speaker">/speaker</option>
         <option value="/topic">/topic</option>
         <option value="/clear">/clear</option>
+        <option value="/disspeaker">/disspeaker</option>
+        <option value="/manager">/manager</option>
+        <option value="/dismanager">/dismanager</option>
+        <option value="/dismoderator">/dismoderator</option>
+        <option value="/restrict">/restrict</option>
+        <option value="/release">/release</option>
+        <option value="/prohibit">/prohibit</option>
         <option value="/test">/test</option>
       </select>
       <textarea
@@ -109,7 +117,7 @@
       let channel = document.getElementById("channel");
       let body = document.querySelector("body");
       let darkmodeBtn = document.getElementById("darkmodeBtn");
-      let cmd = document.getElementById("command")
+      let cmd = document.getElementById("command");
 
       nam.value = localStorage.getItem("name");
       seed.value = localStorage.getItem("seed");
@@ -119,14 +127,21 @@
       }
       dark = localStorage.getItem("dark");
 
+      function sendmsg() {
+        var send = new XMLHttpRequest();
+        send.open(
+          "GET",
+          `/bbs/result?name=${nam.value}&message=${cmd.value} ${msg.value}&seed=${seed.value}&channel=${channel.value}&verify=${element.value}`
+          ,false
+        );
+        send.send().then(reloadmessages());
+      }
+
       form.addEventListener("submit", () => {
         localStorage.setItem("name", nam.value);
         localStorage.setItem("seed", seed.value);
         console.log("clicked");
-        var send = new XMLHttpRequest();
-        send.open("GET",`/bbs/result?name=${nam.value}&message=${cmd.value} ${msg.value}&seed=${seed.value}&channel=${channel.value}&verify=${element.value}`)
-        send.send()
-        reloadmessages()
+        sendmsg();
       });
 
       function AutoLink(str) {
