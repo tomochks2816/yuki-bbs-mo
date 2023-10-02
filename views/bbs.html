@@ -4,29 +4,27 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}title{% endblock %}</title>
+  <title>Home</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="main.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<span id="status">network status</span>
-<label for="message">メッセージ</label>
-<textarea id="message" rows="6" cols="100" required></textarea>
-<br>
-<label for="name">名前</label>
-<input type="text" id="name" value="" maxlength="25" required>　
-<label for="seed">シード</label>
-<input type="text" id="seed" value="" required>
-<button onclick="sendMessageByUser()">送信</button>
-<br>
-<select name="channel" id="channel">
-  <option value="main">雑談</option>
-  <option value="battle">バトスタ</option>
-</select>
-スピ限<input type="checkbox" id="verify" name="verify"><br>
-<label for="instance">使用インスタンス</label>
-<input type="url" id="instance" value="">
-<div id="result">loading...</div>
+  <span id="status">network status</span>
+  <label for="message">メッセージ</label>
+  <textarea id="message" rows="6" cols="100" required></textarea>
+  <br>
+  <label for="name">名前</label>
+  <input type="text" id="name" value="" maxlength="25" required>　
+  <label for="seed">シード</label>
+  <input type="text" id="seed" value="" required>
+  <button onclick="sendMessageByUser()">送信</button>
+  <br>
+  <select name="channel" id="channel">
+    <option value="main">雑談</option>
+    <option value="battle">バトスタ</option>
+  </select>
+  スピ限<input type="checkbox" id="verify" name="verify"><br>
+  <div id="result">loading...</div>
 </body>
 </html>
