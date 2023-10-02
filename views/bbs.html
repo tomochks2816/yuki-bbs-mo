@@ -1,196 +1,32 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>連番を簡単に生成！！</title>
-
-    <style>
-      .example4 {
-        background: linear-gradient(
-            to right,
-            #e60000,
-            #f39800,
-            #fff100,
-            #009944,
-            #0068b7,
-            #1d2088,
-            #920783,
-            #e60000
-          )
-          0 / 200%;
-        animation: 5s example4 linear infinite;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      @keyframes example4 {
-        100% {
-          background-position: 200%;
-        }
-      }
-
-      .dark {
-        background-color: #111;
-        color: #ddd;
-      }
-
-      .dark input,
-      .dark textarea,
-      .dark button,
-      .dark select {
-        background-color: #111;
-        color: #ddd;
-        border: #ddd 1px solid;
-      }
-
-      .dark a {
-        color: cyan;
-      }
-    </style>
-  </head>
-  <body>
-    <button id="darkmodeBtn">ダークモードきりかえ</button>
-    <div class="example4"><h1>掲示板</h1></div>
-    新規さんへ、先ずは挨拶をしましょう。シード値は自分のidを決めるものでパスワードのようなものです。<br />今の話題に勇気を出して参加してみましょう！！！<br />
-    メッセージが送れない場合メッセージや名前が規制されている可能性があります。<br />
-    送信ボタンを押してから若干遅延があります<br />
-    <a href="/bbs/how">使い方</a><br />
-
-    <form id="form">
-      <select name="channel" id="channel">
-        <option value="main" selected>雑談</option>
-        <option value="battle">バトルスタジアム</option>
-      </select>
-      <br />
-      <label for="message">メッセージ</label>
-      <select name="command" id="command">
-        <option value="" selected></option>
-        <option value="/del">/del</option>
-        <option value="/speaker">/speaker</option>
-        <option value="/topic">/topic</option>
-        <option value="/clear">/clear</option>
-        <option value="/disspeaker">/disspeaker</option>
-        <option value="/manager">/manager</option>
-        <option value="/dismanager">/dismanager</option>
-        <option value="/dismoderator">/dismoderator</option>
-        <option value="/restrict">/restrict</option>
-        <option value="/release">/release</option>
-        <option value="/prohibit">/prohibit</option>
-        <option value="/test">/test</option>
-      </select>
-      <textarea
-        name="message"
-        rows="6"
-        cols="100"
-        maxlength="50"
-        id="msg"
-        required
-      ></textarea>
-      <p></p>
-      <label for="name">名前</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value=""
-        maxlength="25"
-        required
-      />
-      <label for="seed">シード</label>
-      <input type="text" id="seed" name="seed" value="" required />
-      <button id="submit">送信する</button>
-      <br />
-      スピーカー以上のメッセージのみ表示<input
-        type="checkbox"
-        id="filter"
-        name="verify"
-      />
-      <h2>投稿</h2>
-    </form>
-
-    <div id="messages"></div>
-    <script>
-      let submitbtn = document.getElementById("submit");
-      let msg = document.getElementById("msg");
-      let nam = document.getElementById("name");
-      let seed = document.getElementById("seed");
-      let form = document.getElementById("form");
-      let element = document.getElementById("filter");
-      let channel = document.getElementById("channel");
-      let body = document.querySelector("body");
-      let darkmodeBtn = document.getElementById("darkmodeBtn");
-      let cmd = document.getElementById("command");
-
-      nam.value = localStorage.getItem("name");
-      seed.value = localStorage.getItem("seed");
-
-      if (!localStorage.hasOwnProperty("dark")) {
-        localStorage.setItem("dark", 0);
-      }
-      dark = localStorage.getItem("dark");
-
-      function sendmsg() {
-        var send = new XMLHttpRequest();
-        send.open(
-          "GET",
-          `/bbs/result?name=${nam.value}&message=${cmd.value} ${msg.value}&seed=${seed.value}&channel=${channel.value}&verify=${element.value}`
-          ,false
-        );
-        send.send().then(reloadmessages());
-      }
-
-      form.addEventListener("submit", () => {
-        localStorage.setItem("name", nam.value);
-        localStorage.setItem("seed", seed.value);
-        console.log("clicked");
-        sendmsg();
-      });
-
-      function AutoLink(str) {
-        var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
-        var regexp_makeLink = function (all, url, h, href) {
-          return '<a href="h' + href + '">' + url + "</a>";
-        };
-
-        return str.replace(regexp_url, regexp_makeLink);
-      }
-
-      function reloadmessages() {
-        var xhr = new XMLHttpRequest();
-        xhr.open(
-          "GET",
-          "/bbs/api?channel=" +
-            channel.value +
-            "&verify=" +
-            element.checked +
-            "&t=" +
-            Date.now()
-        );
-        xhr.onload = function () {
-          if (xhr.status == 200) {
-            document.getElementById("messages").innerHTML = AutoLink(
-              xhr.responseText
-            );
-          }
-        };
-        xhr.send();
-      }
-      reloadmessages();
-      setTimeout(reloadmessages, 1000);
-      setInterval(reloadmessages, 5000);
-
-      darkmodeBtn.addEventListener("click", () => {
-        if (dark == 1) {
-          localStorage.setItem("dark", 0);
-          dark = 0;
-        } else {
-          localStorage.setItem("dark", 1);
-          dark = 1;
-        }
-        body.classList.toggle("dark");
-      });
-
-      if (dark == 1) {
-        body.classList.toggle("dark");
-      }
-    </script>
-  </body>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}title{% endblock %}</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="main.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<span id="status">network status</span>
+<label for="message">メッセージ</label>
+<textarea id="message" rows="6" cols="100" required></textarea>
+<br>
+<label for="name">名前</label>
+<input type="text" id="name" value="" maxlength="25" required>　
+<label for="seed">シード</label>
+<input type="text" id="seed" value="" required>
+<button onclick="sendMessageByUser()">送信</button>
+<br>
+<select name="channel" id="channel">
+  <option value="main">雑談</option>
+  <option value="battle">バトスタ</option>
+</select>
+スピ限<input type="checkbox" id="verify" name="verify"><br>
+<label for="instance">使用インスタンス</label>
+<input type="url" id="instance" value="">
+<div id="result">loading...</div>
+</body>
 </html>
