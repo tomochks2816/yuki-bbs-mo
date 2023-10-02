@@ -26,6 +26,34 @@
   </select>
   スピ限<input type="checkbox" id="verify" name="verify"><br>
   <div id="result">loading...</div>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-width: 100vw;
+}
+
+#status {
+  position: absolute;
+  right: 10px;
+}
+
+.online {
+  background-color: greenyellow;
+  box-shadow: 0 0 0.5em limegreen;
+}
+
+.offline {
+  background-color: red;
+  box-shadow: 0 0 0.5em orangered;
+}
+
+.anchor {
+  border-radius: 0;
+  background-color: #ddd;
+}
+</style>
 <script>
 // オートリンク
 function autoLink(str) {
