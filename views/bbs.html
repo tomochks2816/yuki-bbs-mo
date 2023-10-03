@@ -67,7 +67,7 @@ function sendMessage(name, seed, channel, message) {
   } else {
     $.ajax({
       type: 'POST',
-      url: `${localStorage.getItem('instance')}/bbs/result`,
+      url: '/bbs/result',
       data: {
         'name': name,
         'seed': seed,
@@ -97,10 +97,7 @@ function loadMessage() {
   
   var channel = $('#channel').val();
   var filter = $('#verify').prop('checked');
-
-  if (localStorage.getItem('instance') === null) {
-    return
-  }
+  
   xhr = $.ajax({
     type: 'GET',
     url: '/bbs/api',
