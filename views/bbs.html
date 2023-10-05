@@ -24,6 +24,30 @@
   <br>
   <button onclick="sendMessageByUser()">送信</button>
   <br>
+    
+  <button id="openModal">設定</button>
+  <div id="modalOverlay">
+    <div id="modal">
+      <button id="closeModal">閉じる</button>
+      <h3>設定</h3>
+      <label for="darkmode">ダークモード:</label>
+      <input name="darkmode" type="checkbox">
+      <br>
+      <label for="font">フォント:</label>
+      <select name="font" id="font-select">
+        <option value="">default</option>
+        <option value="Monospace">Monospace</option>
+        <option value="Arial">Arial</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Verdana">Verdana</option>
+      </select>
+      <br>
+      <label for="font-size">フォントサイズ:</label>
+      <input name="font-size" type="range" min=6 max=26 id="font-size">
+      <output id="font-size-val"></output>
+    </div>
+  </div>
   <div id="result">loading...</div>
 <style>
 body {
@@ -57,6 +81,38 @@ textarea {
 .anchor {
   border-radius: 0;
   background-color: #ddd;
+}
+
+#modalOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  background-color: white;
+  padding: 20px;
+  display: none;
+  border-radius: 5px;
+}
+
+#closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+input {
+  height: 1em;
 }
 </style>
 <script>
@@ -189,6 +245,27 @@ $(document).ready(function() {
   $('#seed').on('input', function() {
     var newSeed = $(this).val();
     localStorage.setItem('seed', newSeed);
+  });
+
+    $('#openModal').click(function() {
+    $('#modalOverlay').fadeIn(300);
+    $('#modal').fadeIn(300);
+  });
+
+  $('#closeModal').click(function() {
+    $('#modalOverlay').fadeOut(300);
+    $('#modal').fadeOut(300);
+  });
+  
+  $('#font-select').change(function() {
+    var selectedFont = $(this).val();
+    $('*').css('font-family', selectedFont);
+  });
+  
+  $('#font-size').change(function() {
+    var fontSize = $(this).val();
+    $('*').css('font-size', `${fontSize}px`);
+    $('#font-size-val').text(`${fontSize}px`);
   });
 
   loadMessage();
