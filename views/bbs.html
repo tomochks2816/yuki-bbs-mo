@@ -182,7 +182,7 @@ function loadMessage() {
         var number = firstTd.text();
         firstTd.html(`<button class="anchor">${number}</button>`);
         var secondTdText = secondTd.text();
-        var regex = /<font color="(darkcyan|darkmagenta|red|darkorange)">@[0-9a-zA-Z]{7}<\/font>/g;
+        var regex = /<font color=\"(darkcyan|darkmagenta|red|darkorange)\">@[0-9a-zA-Z]{7}<\/font>/g;
         var matches = secondTdText.match(regex);
         if (matches) {
           var temp = secondTdText.replace(regex, '<button id="userIDAnchor">$&</button>');
