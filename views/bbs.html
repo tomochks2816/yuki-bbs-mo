@@ -260,26 +260,26 @@ $(document).ready(function() {
   var selectedFont = localStorage.getItem('font');
   if (selectedFont) {
     $('#font-select').val(selectedFont);
-    $('*').css('font-family', selectedFont);
+    $('body').css('font-family', selectedFont);
   }
   
   $('#font-select').change(function() {
     var newSelectedFont = $(this).val();
     localStorage.setItem('font', newSelectedFont);
-    $('*').css('font-family', newSelectedFont);
+    $('body').css('font-family', newSelectedFont);
   });
   
   var selectedFontSize = localStorage.getItem('font-size');
   if (selectedFontSize) {
     $('#font-size').val(selectedFontSize);
-    $('*').css('font-size', `${fontSize}px`);
-    $('#font-size-val').text(`${fontSize}px`);
+    $('body').css('font-size', `${selectedFontSize}px`);
+    $('#font-size-val').text(`${selectedFontSize}px`);
   }
   
   $('#font-size').change(function() {
     var newFontSize = $(this).val();
     localStorage.setItem('font-size', newFontSize)
-    $('*').css('font-size', `${newFontSize}px`);
+    $('body').css('font-size', `${newFontSize}px`);
     $('#font-size-val').text(`${newFontSize}px`);
   });
 
