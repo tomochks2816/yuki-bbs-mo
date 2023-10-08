@@ -178,12 +178,29 @@ function loadMessage() {
       $('#result').html(data);
       $('table tr').each(function() {
         var firstTd = $(this).find('td:first');
-        var content = firstTd.text();
-        firstTd.html(`<button class="anchor">${content}</button>`);
+        var secondTd = $(this).find('td:eq(1)');
+        var number = firstTd.text();
+        firstTd.html(`<button class="anchor">${number}</button>`);
+        var secondTdText = secondTd.text();
+        var regex = /<font color="(darkcyan|darkmagenta|red|darkorange)">@[0-9a-zA-Z]{7}<\/font>/g;
+        var matches = secondTdText.match(regex);
+        if (matches) {
+          var temp = secondTdText.replace(regex, '<button id="userIDAnchor">$&</button>');
+          secondTd.html(temp);
+        }
       });
       $('.anchor').click(function() {
         var currentMsg = $('#message').val();
         $('#message').val(currentMsg + '>>' + $(this).text() + ' ');
+      });
+      $('.userIDAnchor').click(function() {
+        var currentMsg = $('#message').val();
+        var cmdRegex = /^\/(dis)?speaker|manager|moderator$/g;
+        if (currentMsg.match(cmdRegex)) {
+          $('#message').val(currentMsg + ' ' + $(this).text().substring(1));
+        } else {
+          $('#message').val(currentMsg + $(this).text().substring(1));
+        }
       });
     }
   });
