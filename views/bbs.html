@@ -181,13 +181,8 @@ function loadMessage() {
         var secondTd = $(this).find('td:eq(1)');
         var number = firstTd.text();
         firstTd.html(`<button class="anchor">${number}</button>`);
-        var secondTdText = secondTd.text();
-        var regex = /<font color=\"(darkcyan|darkmagenta|red|darkorange)\">@[0-9a-zA-Z]{7}<\/font>/g;
-        var matches = secondTdText.match(regex);
-        if (matches) {
-          var temp = secondTdText.replace(regex, '<button id="userIDAnchor">$&</button>');
-          secondTd.html(temp);
-        }
+        var username = secondTd.text();
+        username.html(`<button class="userIDAnchor">${username}</button>`);
       });
       $('.anchor').click(function() {
         var currentMsg = $('#message').val();
@@ -197,9 +192,9 @@ function loadMessage() {
         var currentMsg = $('#message').val();
         var cmdRegex = /^\/(dis)?speaker|manager|moderator$/g;
         if (currentMsg.match(cmdRegex)) {
-          $('#message').val(currentMsg + ' ' + $(this).text().substring(1));
+          $('#message').val(currentMsg + ' ' + $(this).text());
         } else {
-          $('#message').val(currentMsg + $(this).text().substring(1));
+          $('#message').val(currentMsg + $(this).text());
         }
       });
     }
