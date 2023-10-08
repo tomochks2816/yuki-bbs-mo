@@ -180,9 +180,9 @@ function loadMessage() {
         var firstTd = $(this).find('td:first');
         var secondTd = $(this).find('td:eq(1)');
         var number = firstTd.text();
-        firstTd.html(`<button class="anchor">${number}</button>`);
         var username = secondTd.html();
-        username.html(`<button class="userIDAnchor">${username}</button>`);
+        firstTd.html(`<button class="anchor">${number}</button>`);
+        secondTd.html(`<button class="userIDAnchor">${username}</button>`);
       });
       $('.anchor').click(function() {
         var currentMsg = $('#message').val();
