@@ -306,6 +306,22 @@ $(document).ready(function() {
     $('#font-size-val').text(`${newFontSize}px`);
   });
 
+  var isDarkmode = localStorage.getItem('darkmode') === 'true';
+  $('#darkmode').prop('checked', isDarkmode);
+
+  $('#darkmode').change(function() {
+    var isDarkmode = $(this).prop('checked');
+    localStorage.setItem('darkmode', isDarkmode.toString());
+    if (isDarkmode) {
+      $('body').css('background-color', 'black');
+      $('body').css('color', 'white');
+    }
+  });
+  if (isDarkmode) {
+    $('body').css('background-color', 'black');
+    $('body').css('color', 'white');
+  }
+
   loadMessage();
   setInterval(function() { loadMessage(); }, 5000);
 });
