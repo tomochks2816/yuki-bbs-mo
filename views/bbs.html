@@ -79,19 +79,12 @@ textarea {
   box-shadow: 0 0 7px orangered;
 }
 
-.anchor {
+button {
   padding: 0;
   margin: 0;
   border-radius: 0;
+  background-color: rgba(225, 225, 225, 0.1);
   color: black;
-  text-align: left;
-}
-
-.userIDAnchor {
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  background-color: #eee;
   text-align: left;
 }
 
@@ -125,6 +118,7 @@ textarea {
 
 input {
   height: 1em;
+  border-radius: 0;
 }
 </style>
 <script>
@@ -318,21 +312,18 @@ $(document).ready(function() {
       $('#modal').css('background-color', 'black');
       $('body').css('color', 'white');
       $('button').css('color', 'white');
-      $('button').css('background-color', 'black');
     } else {
       $('body').css('background-color', 'white');
       $('#modal').css('background-color', 'white');
       $('body').css('color', 'black');
       $('button').css('color', 'black');
-      $('button').css('background-color', 'white');
     }
   });
   if (isDarkmode) {
     $('body').css('background-color', 'black');
-    $('#modal').css('background-color', 'black');
-    $('body').css('color', 'white');
-    $('button').css('color', 'white');
-    $('button').css('background-color', 'black');
+      $('#modal').css('background-color', 'black');
+      $('body').css('color', 'white');
+      $('button').css('color', 'white');
   }
 
   loadMessage();
