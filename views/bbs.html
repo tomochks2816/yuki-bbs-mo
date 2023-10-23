@@ -318,13 +318,22 @@ $(document).ready(function() {
       $('body').css('background-color', 'black');
       $('#modal').css('background-color', 'black');
       $('body').css('color', 'white');
+      $('button').css('color', 'white');
+      $('button').css('background-color', 'black');
+    } else {
+      $('body').css('background-color', 'white');
+      $('#modal').css('background-color', 'white');
+      $('body').css('color', 'black');
+      $('button').css('color', 'black');
+      $('button').css('background-color', 'white');
     }
   });
   if (isDarkmode) {
     $('body').css('background-color', 'black');
     $('#modal').css('background-color', 'black');
     $('body').css('color', 'white');
-    
+    $('button').css('color', 'white');
+    $('button').css('background-color', 'black');
   }
 
   loadMessage();
