@@ -181,9 +181,7 @@ function sendMessageByUser() {
 // メッセージ読み込み
 var xhr;
 function loadMessage() {
-  if (xhr && xhr.readyState !== 4) {
-    xhr.abort();
-  }
+  if (xhr && xhr.readyState !== 4) { xhr.abort(); }
   
   var channel = $('#channel').val();
   var filter = $('#verify').prop('checked');
@@ -217,11 +215,7 @@ function loadMessage() {
       $('.userIDAnchor').click(function() {
         var currentMsg = $('#message').val();
         var cmdRegex = /^\/(dis)?speaker|manager|moderator$/g;
-        if (currentMsg.match(cmdRegex)) {
-          $('#message').val(currentMsg + ' ' + $(this).text());
-        } else {
-          $('#message').val(currentMsg + $(this).text());
-        }
+        if (currentMsg.match(cmdRegex)) { $('#message').val(currentMsg + ' ' + $(this).text()); } else { $('#message').val(currentMsg + $(this).text()); }
       });
       if (localStorage.getItem('darkmode') === 'true') { toDarkmode(); } else { toLightmode(); }
     }
