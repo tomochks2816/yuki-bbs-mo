@@ -5,6 +5,7 @@ import time
 import datetime
 import random
 import os
+import base64
 from cache import cache
 
 
@@ -73,12 +74,14 @@ def bbsapi_cached(verify,channel):
 
 @app.get("/bbs/api",response_class=HTMLResponse)
 def view_bbs(request: Request,t: str,channel:Union[str,None]="main",verify: Union[str,None] = "false"):
-    print(fr"{url}bbs/api?t={urllib.parse.quote(t)}&verify={urllib.parse.quote(verify)}&channel={urllib.parse.quote(channel)}")
+    # print(fr"{url}bbs/api?t={urllib.parse.quote(t)}&verify={urllib.parse.quote(verify)}&channel={urllib.parse.quote(channel)}")
     return bbsapi_cached(verify,channel)
 
 @app.get("/bbs/result")
 def write_bbs(request: Request,name: str = "",message: str = "",seed:Union[str,None] = "",channel:Union[str,None]="main",verify:Union[str,None]="false"):
-    print(get_info(request))
+    name = base64.b64decode(name).decode('utf-8')
+    # print(get_info(request))
+    print(f"name:{name}, seed:{seed}, channel:{channel}, message:{message}")
     t = requests.get(fr"{url}bbs/result?name={urllib.parse.quote(name)}&message={urllib.parse.quote(message)}&seed={urllib.parse.quote(seed)}&channel={urllib.parse.quote(channel)}&verify={urllib.parse.quote(verify)}&info={urllib.parse.quote(get_info(request))}",cookies={"yuki":"True"}, allow_redirects=False)
     if t.status_code != 307:
         return HTMLResponse(t.text)
