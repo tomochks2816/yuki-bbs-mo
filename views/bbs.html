@@ -222,9 +222,8 @@ function loadMessage() {
         } else {
           $('#message').val(currentMsg + $(this).text());
         }
-        var dark = localStorage.getItem('darkmode') === 'true';
-        if (dark) { toDarkmode(); } else { toLightmode(); }
       });
+      if (localStorage.getItem('darkmode') === 'true') { toDarkmode(); } else { toLightmode(); }
     }
   });
 }
