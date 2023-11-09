@@ -228,9 +228,16 @@ function loadMessage() {
         firstTd.html(`<button class="anchor" id="${number}">${number}</button>`);
         secondTd.html(`<button class="userIDAnchor">${username}</button>`);
       });
-      $("#result").contents().each(function() {
+      $("#result").find("*").contents().each(function() {
         if (this.nodeType === 3) {
-            $(this).replaceWith($(this).text().replace(/(https?:\/\/[^\s]+)/g, '<a href="$1">$1</a>'));
+          var text = $(this).text();
+          var urlRegex = /(https?:\/\/[^\s]+)/g;
+          if (urlRegex.test(text)) {
+            var replacedText = text.replace(urlRegex, function(url) {
+              return '<a href="' + url + '">' + url + '</a>';
+            });
+            $(this).replaceWith(replacedText);
+          }
         }
       });
       $('.anchor').click(function() {
