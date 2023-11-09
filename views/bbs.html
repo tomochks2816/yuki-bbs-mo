@@ -226,7 +226,7 @@ function loadMessage() {
         var secondTd = $(this).find('td:eq(1)');
         var number = firstTd.text();
         var username = secondTd.html();
-        firstTd.html(`<button class="anchor">${number}</button>`);
+        firstTd.html(`<button class="anchor" id="${number}">${number}</button>`);
         secondTd.html(`<button class="userIDAnchor">${username}</button>`);
       });
       $('.anchor').click(function() {
