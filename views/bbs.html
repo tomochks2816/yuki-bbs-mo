@@ -134,11 +134,10 @@ input {
 <script>
 // オートリンク
 function autoLink(str) {
-  var regexp_url = /(https?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+)/g;
-  var regexp_makeLink = function(all, url, h, href) {
-    return '<a href="' + href + '">' + url + '</a>';
-  }
-  return str.replace(regexp_url, regexp_makeLink);
+  var urlRegex = /(https?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+)/g;
+  return text.replace(urlRegex, function(url) {
+    return '<a href="' + url + '">' + url + '</a>';
+  });
 }
 
 // ライトモード化
@@ -228,6 +227,11 @@ function loadMessage() {
         var username = secondTd.html();
         firstTd.html(`<button class="anchor" id="${number}">${number}</button>`);
         secondTd.html(`<button class="userIDAnchor">${username}</button>`);
+      });
+      $("#result").contents().each(function() {
+        if (this.nodeType === 3) {
+            $(this).replaceWith($(this).text().replace(/(https?:\/\/[^\s]+)/g, '<a href="$1">$1</a>'));
+        }
       });
       $('.anchor').click(function() {
         var currentMsg = $('#message').val();
