@@ -58,6 +58,11 @@ body {
   max-width: 100vw;
 }
 
+select {
+  border-radius: 0;
+  padding: 0;
+}
+  
 textarea {
   margin: 10px;
 }
@@ -138,16 +143,28 @@ function autoLink(str) {
 function toLightmode() {
   $('body').css('background-color', 'white');
   $('#modal').css('background-color', 'white');
+  $('textarea').css('background-color', 'white');
+  $('input').css('background-color', 'white');
   $('body').css('color', 'black');
   $('button').css('color', 'black');
+  $('textarea').css('color', 'black');
+  $('input').css('color', 'black');
+  $('textarea').css('border', '1px solid black');
+  $('input').css('border', '1px solid black');
 }
   
 // ダークモード化
 function toDarkmode() {
   $('body').css('background-color', 'black');
   $('#modal').css('background-color', 'black');
+  $('textarea').css('background-color', 'black');
+  $('input').css('background-color', 'black');
   $('body').css('color', 'white');
   $('button').css('color', 'white');
+  $('textarea').css('color', 'white');
+  $('input').css('color', 'white');
+  $('textarea').css('border', '1px solid white');
+  $('input').css('border', '1px solid white');
 }
   
 // メッセージ送信
