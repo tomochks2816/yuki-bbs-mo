@@ -222,6 +222,8 @@ function loadMessage() {
         } else {
           $('#message').val(currentMsg + $(this).text());
         }
+        var dark = localStorage.getItem('darkmode') === 'true';
+        if (dark) { toDarkmode(); } else { toLightmode(); }
       });
     }
   });
@@ -327,17 +329,9 @@ $(document).ready(function() {
   $('#darkmode').change(function() {
     var isDarkmode = $(this).prop('checked');
     localStorage.setItem('darkmode', isDarkmode.toString());
-    if (isDarkmode) {
-      toDarkmode();
-    } else {
-      toLightmode();
-    }
+    if (isDarkmode) { toDarkmode(); } else { toLightmode(); }
   });
-  if (isDarkmode) {
-    toDarkmode();
-  } else {
-    toLightmode();
-  }
+  if (isDarkmode) { toDarkmode(); } else { toLightmode(); }
 
   loadMessage();
   setInterval(function() { loadMessage(); }, 5000);
