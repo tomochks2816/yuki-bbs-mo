@@ -63,6 +63,10 @@ textarea {
   margin: 10px;
 }
 
+a {
+  color: black;
+}
+  
 #status {
   position: absolute;
   top: 10px;
@@ -131,6 +135,23 @@ function autoLink(str) {
   return str.replace(regexp_url, regexp_makeLink);
 }
 
+// ライトモード化
+function toLightmode() {
+  $('body').css('background-color', 'white');
+  $('#modal').css('background-color', 'white');
+  $('body').css('color', 'black');
+  $('button').css('color', 'black');
+}
+  
+// ダークモード化
+function toDarkmode() {
+  $('body').css('background-color', 'black');
+  $('#modal').css('background-color', 'black');
+  $('body').css('color', 'white');
+  $('button').css('color', 'white');
+}
+  
+// メッセージ送信
 function sendMessage(name, seed, channel, message) {
   if (name=='' || seed=='' || channel=='' || message=='') {
     console.warn('Invalid argument(s).')
@@ -308,27 +329,15 @@ $(document).ready(function() {
     var isDarkmode = $(this).prop('checked');
     localStorage.setItem('darkmode', isDarkmode.toString());
     if (isDarkmode) {
-      $('body').css('background-color', 'black');
-      $('#modal').css('background-color', 'black');
-      $('body').css('color', 'white');
-      $('button').css('color', 'white');
+      toDarkmode();
     } else {
-      $('body').css('background-color', 'white');
-      $('#modal').css('background-color', 'white');
-      $('body').css('color', 'black');
-      $('button').css('color', 'black');
+      toLightmode();
     }
   });
   if (isDarkmode) {
-    $('body').css('background-color', 'black');
-    $('#modal').css('background-color', 'black');
-    $('body').css('color', 'white');
-    $('button').css('color', 'white');
+    toDarkmode();
   } else {
-    $('body').css('background-color', 'white');
-    $('#modal').css('background-color', 'white');
-    $('body').css('color', 'black');
-    $('button').css('color', 'black');
+    toLightmode();
   }
 
   loadMessage();
