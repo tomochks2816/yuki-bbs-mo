@@ -174,13 +174,14 @@ function sendMessage(name, seed, channel, message) {
   if (name=='' || seed=='' || channel=='' || message=='') {
     console.warn('Invalid argument(s).')
   } else {
+    message = btoa(message);
     $.ajax({
       type: 'GET',
       url: '/bbs/result',
       data: {
         'name': name,
         'seed': seed,
-        'message': btoa(message),
+        'message': message,
         'channel': channel
       }
     });
