@@ -233,6 +233,8 @@ function loadMessage() {
       $("#result").find("*").contents().each(function() {
         if (this.nodeType === 3) {
           var text = $(this).text();
+          var replacedText = text.replace(/>>(\d+) /g, "<a href='#$1'>$&</a>");
+          $(this).replaceWith(replacedText);
           var urlRegex = /(https?:\/\/[^\s]+)/g;
           if (urlRegex.test(text)) {
             var replacedText = text.replace(urlRegex, function(url) {
