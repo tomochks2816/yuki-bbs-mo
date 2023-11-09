@@ -236,12 +236,15 @@ function loadMessage() {
       });
       $("#result").find("*").contents().each(function() {
         if (this.nodeType === 3) {
-          var text = $(this).text();
+          var text $(this).text();
           var replacedText = text.replace(/≫(\d+)/g, "<a href='#$1'>$&</a>");
           $(this).replaceWith(replacedText);
+        }
+        if (this.nodeType === 3) {
+          text = $(this).text();
           var urlRegex = /(https?:\/\/[^\s]+)/g;
           if (urlRegex.test(text)) {
-            var replacedText = text.replace(urlRegex, function(url) {
+            replacedText = text.replace(urlRegex, function(url) {
               return '<a href="' + url + '">' + url + '</a>';
             });
             $(this).replaceWith(replacedText);
