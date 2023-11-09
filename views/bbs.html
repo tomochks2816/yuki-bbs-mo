@@ -174,7 +174,7 @@ function sendMessage(name, seed, channel, message) {
   if (name=='' || seed=='' || channel=='' || message=='') {
     console.warn('Invalid argument(s).')
   } else {
-    message = btoa(message);
+    message = btoa(unescape(encodeURIComponent(message)));
     $.ajax({
       type: 'GET',
       url: '/bbs/result',
