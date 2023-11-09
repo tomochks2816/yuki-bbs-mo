@@ -180,7 +180,7 @@ function sendMessage(name, seed, channel, message) {
       data: {
         'name': name,
         'seed': seed,
-        'message': message,
+        'message': btoa(message),
         'channel': channel
       }
     });
