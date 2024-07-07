@@ -205,7 +205,6 @@ function sendMessageByUser() {
 }
 
 // メッセージ読み込み
-var xhr;
 function loadMessage() {
   if (xhr && xhr.readyState !== 4) { xhr.abort(); }
   
@@ -225,6 +224,9 @@ function loadMessage() {
       't': 0
     },
     success: function(data) {
+      // h3タグをh5タグに変更
+      data = data.replace(/<h3>/g, '<h5>').replace(/<\/h3>/g, '</h5>');
+      
       $('#result').html(data);
       $('table tr').each(function() {
         var firstTd = $(this).find('td:first');
@@ -239,7 +241,7 @@ function loadMessage() {
           var text = $(this).text();
           var replacedText = text.replace(/≫(\d+) /g, "<a href='#$1'>$&</a>");
           var urlRegex = /(https?:\/\/[^\s]+)/g;
-　         if (urlRegex.test(text)) {
+          if (urlRegex.test(text)) {
             replacedText = replacedText.replace(urlRegex, function(url) {
               return '<a href="' + url + '">' + url + '</a>';
             });
